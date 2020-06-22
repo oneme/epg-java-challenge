@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/mvc" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>Users</title>
+
+
+    <link th:replace="common/dependencies :: dependencies"/>
+
+</head>
+<body>
+<div id="vue" class="container">
+    <h1>{{title}}</h1>
+    <br/>
+    <button onclick="window.history.go(-1)" class="btn btn-outline-primary">back</button>
+    <br/>
+    <br/>
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>Title:</th>
+                <th>Type:</th>
+                <th>Status:</th>
+            </tr>
+            <tr v-for="vg in videoGames" v-bind:key="vg.id">
+                <td>{{vg.title}}</td>
+                <td>{{vg.type.name}}</td>
+                <td>{{vg.status ? 'Rented' : 'Available'}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script th:inline="javascript">
+    let vm = new Vue({
+        el: '#vue',
+        mounted () {
+            this.fetchVideoGames();
+        },
+        data: {
+            title: /*[[ ${title} ]]*/ 'title',
+            videoGames: {},
+        },
+        methods: {
+            async fetchVideoGames() {
+                try{
+                    let response = await axios.get("api/videoGames");
+                    this.videoGames = response.data;
+                }catch (e) {
+                    throw e;
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

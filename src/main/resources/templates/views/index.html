@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/mvc" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>index</title>
+
+    <link th:replace="common/dependencies :: dependencies"/>
+
+</head>
+
+<body>
+<div id="vue" class="container">
+    <h1>{{title}}</h1>
+    <br/>
+   <div class="container">
+       <div class="row">
+           <div class="col">
+               <a href="/users" class="btn btn-outline-primary btn-lg btn-block">SHOW USERS</a>
+               <a href="/videogames" class="btn btn-outline-primary btn-lg btn-block">SHOW VIDEO GAMES</a>
+               <a href="/rent" class="btn btn-outline-primary btn-lg btn-block">RENT</a>
+               <a href="/returns" class="btn btn-outline-primary btn-lg btn-block">RETURN</a>
+           </div>
+       </div>
+   </div>
+</div>
+
+<script th:inline="javascript">
+    let vm = new Vue({
+        el: '#vue',
+        mounted () {
+
+        },
+        data: {
+            title: /*[[ ${title} ]]*/ 'title',
+        },
+        methods: {
+
+        }
+
+    })
+</script>
+</body>
+</html>
