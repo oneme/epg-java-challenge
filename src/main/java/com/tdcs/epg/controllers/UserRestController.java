@@ -2,6 +2,8 @@ package com.tdcs.epg.controllers;
 
 import com.tdcs.epg.common.Utils;
 import com.tdcs.epg.services.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
+@Api(value = "UserRestController")
 public class UserRestController {
 
     private Logger logger = LoggerFactory.getLogger(UserRestController.class);
@@ -25,9 +28,10 @@ public class UserRestController {
     }
 
     @GetMapping("/users")
+    @ApiOperation(value = "Get users")
     public ResponseEntity<?> users(){
         ResponseEntity<?> response;
-        String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+        String method = new Object(){}.getClass().getEnclosingMethod().getName();
         logger.info(Utils.prettyLog(className, method, "no request"));
         try{
             response = ResponseEntity.ok(userService.getUsers());
